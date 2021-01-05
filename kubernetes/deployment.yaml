@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snykest
+spec:
+  selector:
+    matchLabels:
+      app: snykest
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: snykest
+    spec:
+      containers:
+        - name: snykest
+          image: garethr/snykest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: snykest-loadbalancer
+spec:
+  type: LoadBalancer
+  loadBalancerSourceRanges:
+    - 127.0.0.0/0
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: snykest
