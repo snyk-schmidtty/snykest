@@ -10,7 +10,7 @@ COPY src src
 RUN --mount=type=cache,target=/root/.m2 ./mvnw install -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-FROM openjdk:8-jdk
+FROM openjdk:8-jre
 ARG DEPENDENCY=/workspace/app/target/dependency
 EXPOSE 8080
 RUN apt-get update && apt-get install -y \
