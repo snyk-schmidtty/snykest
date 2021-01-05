@@ -74,7 +74,7 @@ jobs:
         with:
           command: monitor
           image: ${{ steps.prep.outputs.tag }}
-          args: --file=Dockerfile --project-name=${{ steps.prep.outputs.tag }}
+          args: --file=Dockerfile --app-vulns --project-name=${{ steps.prep.outputs.tag }}
         if: github.event_name != 'pull_request'
       - name: Test the image with Snyk for high-severity vulnerabilities
         uses: snyk/actions/docker@master
