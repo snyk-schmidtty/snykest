@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:experimental
-FROM debian:8 as jdk
+FROM debian:10-slim as jdk
 
 ARG ZULU_REPO_VER=1.0.0-2
 
