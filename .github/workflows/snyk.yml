@@ -115,4 +115,10 @@ jobs:
           tags: ${{ steps.prep.outputs.tags }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
+          labels: |
+            org.opencontainers.image.created=${{ steps.prep.outputs.created }}
+            org.opencontainers.image.source=${{ github.repositoryUrl }}
+            org.opencontainers.image.version=${{ steps.prep.outputs.version }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.licenses=${{ github.event.repository.license.name }}
         if: github.event_name != 'pull_request'
